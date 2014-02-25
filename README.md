@@ -2,6 +2,10 @@
 
 Simply server manager for manage virtual hosts in nginx.
 
+## Requirements
+
+* ngnix configuration by this [manual](https://gist.github.com/jsifalda/3331643)
+
 ## Installation
 
 1. Run  ```$ sudo sh install.sh [command-name]```
