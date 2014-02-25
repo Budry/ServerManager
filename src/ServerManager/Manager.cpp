@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+
+#include <unistd.h>
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -61,7 +63,7 @@ string Manager::create(string hostName)
 		nginxConfig << "server {" << endl 
 			<< "\tlisten 80;" << endl 
 			<< "\tserver_name " << hostName << this->config.ext << ";" << endl 
-			<< "\troot " << this->config.htdocs << "/" << hostName << "/www" << endl
+			<< "\troot " << this->config.htdocs << "/" << hostName << "/" << this->config.root << ";" << endl
 			<< endl
 			<< "\terror_log " << this->config.htdocs << "/" << hostName << "/log/" << hostName << "_error.log;" << endl
 			<< "\taccess_log " << this->config.htdocs << "/" << hostName << "/log/" << hostName << "_accesslog.log;" << endl
@@ -83,6 +85,7 @@ string Manager::create(string hostName)
 	} else {
 		throw "Nginx config file has not been created";
 	}
+	nginxConfig.close();
 	result.append("\nStarting nginx");
 	system("nginx");
 
@@ -112,7 +115,7 @@ string Manager::remove(string hostName)
 		string newContent = "";
 		while(getline(ihostFile, line)) {
 			if (line.compare("127.0.0.1\t" + hostName + this->config.ext) != 0)  {
-				newContent.append(line);
+				newContent.append(line + "\n");
 			}
 		}
 		ofstream ohostFile(this->config.hosts.c_str()/*, ios_base::app | ios_base::out*/);
