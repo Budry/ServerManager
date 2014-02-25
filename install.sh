@@ -17,6 +17,7 @@ then
 	COMMAND_NAME=$1
 fi
 
+mkdir -p build/
 COMMAND=${USER_BIN}${COMMAND_NAME}
 
 make -B
