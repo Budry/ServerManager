@@ -2,14 +2,14 @@
 
 ## Installation
 
-Run
+1. Run
 
 ```shell
 $ sudo sh install.sh [command-name]
 ```
-Default command name is ```server-manager``` but you can change this if run installation script with command name argument.
+2. Default command name is ```server-manager``` but you can change this if run installation script with command name argument.
 
-And next you must edit ```/home/user/.server-manager``` config file and fill your paths and configuration.
+3. And next you must edit ```/home/user/.server-manager``` config file and fill your paths and configuration.
 
 ## Usages
 
