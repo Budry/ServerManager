@@ -91,6 +91,9 @@ string Manager::create(string hostName)
 	}
 	result.append("\nStarting nginx");
 	system("nginx");
+	result.append("Set chmod");
+	string chmodCmd = "chmod -R 0777 " + this->config.htdocs + "/" + hostName;
+	system(chmodCmd.c_str());
 
 	return result;
 }
@@ -117,7 +120,7 @@ string Manager::remove(string hostName)
 		string line;
 		string newContent = "";
 		while(getline(ihostFile, line)) {
-			if (line.compare("127.0.0.1\t" + hostName + this->config.ext) != 0)  {
+			if (line.compare("127.0.0.1\t" + hostName + this->config.ext) != 0 && !line.empty())  {
 				newContent.append(line + "\n");
 			}
 		}
