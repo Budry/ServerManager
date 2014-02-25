@@ -11,6 +11,8 @@ Default command name is ```server-manager``` but you can change this if run inst
 
 ## Usages
 
+**Important! Server manager must be run with sudo**
+
 ```shell
 $ sudo server-mamager list
 $ sudo server-manager create <host-name> [options]
