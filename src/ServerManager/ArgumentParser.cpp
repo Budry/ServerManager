@@ -49,7 +49,7 @@ string ArgumentParser::getParam()
 string ArgumentParser::getOption(string key)
 {
 	int i;
-	for(int i = 0; i < this->argv.size(); i++) {
+	for(i = 0; i < this->argv.size(); i++) {
 		if (this->argv[i].compare(key) == 0) {
 			return this->argv[i + 1];
 		}
