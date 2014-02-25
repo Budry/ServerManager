@@ -18,7 +18,7 @@ namespace ServerManager
 {
 	typedef struct {
 		string root;
-		string extension;
+		string ext;
 		string htdocs;
 		string nginx;
 		string hosts;
