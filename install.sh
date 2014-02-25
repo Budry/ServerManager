@@ -12,6 +12,8 @@ else
 	cp .server-manager_default ${CONFIG_PATH}
 fi
 
+chmod -R 0777 ${CONFIG_PATH}
+
 if [ $1 ]
 then
 	COMMAND_NAME=$1
