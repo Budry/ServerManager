@@ -6,8 +6,15 @@ COMMAND_NAME="server-manager"
 
 if [ -f ${CONFIG_PATH} ] 
 then
-	echo "File '~/.server-manager' already exist!"
-	exit 1
+	echo "ServerManager need ~/.server-manager file for store default configuration. Do we can overwrite it? (Y/n):"
+	read rewrite
+	if [ "$rewrite" = "y" ]
+	then
+		cp .server-manager_default ${CONFIG_PATH}
+	else
+		echo "Install terminated"
+		exit 1
+	fi
 else
 	cp .server-manager_default ${CONFIG_PATH}
 fi
@@ -34,3 +41,6 @@ else
 fi
 
 rm -rf build/server-manager
+echo "ServerManager has been installed successfully"
+
+exit 0
