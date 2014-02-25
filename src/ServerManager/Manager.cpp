@@ -37,6 +37,7 @@ string Manager::getList()
 
 		return content;
 	} else {
+		file.close();
 		throw "Invalid hosts file";	
 	}
 }
@@ -52,6 +53,7 @@ string Manager::create(string hostName)
 		result.append("\nAdded virtual host into hosts file");
 		hostsFile.close();
 	} else {
+		hostsFile.close();
 		throw "Invalid hosts file";
 	}
 	string path = this->config.nginx;
@@ -82,10 +84,11 @@ string Manager::create(string hostName)
 			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/log");
 			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.root);
 		}
+		nginxConfig.close();
 	} else {
+		nginxConfig.close();
 		throw "Nginx config file has not been created";
 	}
-	nginxConfig.close();
 	result.append("\nStarting nginx");
 	system("nginx");
 
@@ -121,8 +124,11 @@ string Manager::remove(string hostName)
 		ofstream ohostFile(this->config.hosts.c_str()/*, ios_base::app | ios_base::out*/);
 		ohostFile << newContent;
 		result.append("\nVirtual host has been removed from hosts file");
+		ihostFile.close();
+		ohostFile.close();
 	} else {
 		throw "Invalid hosts file";
+		ihostFile.close();
 	}
 	result.append("\nStarting nginx");
 	system("nginx");

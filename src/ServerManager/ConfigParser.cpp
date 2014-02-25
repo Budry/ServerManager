@@ -51,6 +51,7 @@ Configuration ConfigParser::getConfiguration()
 			}
 		}
 	}
+	file.close();
 
 	return cfg;
 }
