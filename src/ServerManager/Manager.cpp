@@ -47,7 +47,7 @@ string Manager::create(string hostName)
 	system("nginx -s stop");
 	ofstream hostsFile(this->config.hosts.c_str(), ios_base::app | ios_base::out);
 	if (hostsFile.good()) {
-		hostsFile << endl << "127.0.0.1\t" << hostName << this->config.ext;
+		hostsFile << endl << "127.0.0.1\t" << hostName << this->config.tld;
 		result.append("\nAdded virtual host into hosts file");
 		hostsFile.close();
 	} else {
@@ -62,7 +62,7 @@ string Manager::create(string hostName)
 	if (nginxConfig.good()) {
 		nginxConfig << "server {" << endl 
 			<< "\tlisten 80;" << endl 
-			<< "\tserver_name " << hostName << this->config.ext << ";" << endl 
+			<< "\tserver_name " << hostName << this->config.tld << ";" << endl
 			<< "\troot " << this->config.htdocs << "/" << hostName << "/" << this->config.root << ";" << endl
 			<< endl
 			<< "\terror_log " << this->config.htdocs << "/" << hostName << "/log/" << hostName << "_error.log;" << endl
@@ -118,7 +118,7 @@ string Manager::remove(string hostName)
 		string line;
 		string newContent = "";
 		while(getline(ihostFile, line)) {
-			if (line.compare("127.0.0.1\t" + hostName + this->config.ext) != 0 && !line.empty())  {
+			if (line.compare("127.0.0.1\t" + hostName + this->config.tld) != 0 && !line.empty())  {
 				newContent.append(line + "\n");
 			}
 		}

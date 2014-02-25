@@ -37,8 +37,8 @@ Configuration ConfigParser::getConfiguration()
 			if (getline(line_string, value)) {
 				if (key.compare("root") == 0) {
 					cfg.root = value;
-				} else if (key.compare("ext") == 0) {
-					cfg.ext = value;
+				} else if (key.compare("tld") == 0) {
+					cfg.tld = value;
 				} else if (key.compare("htdocs") == 0) {
 					cfg.htdocs = value;
 				} else if (key.compare("nginx") == 0) {

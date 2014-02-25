@@ -19,8 +19,8 @@ Configuration Configurator::applyOptions(Configuration config, ArgumentParser* a
 {
 	if (!args->getOption("--root").empty()) {
 		config.root = args->getOption("--root");
-	} else if (!args->getOption("--ext").empty()) {
-		config.ext = args->getOption("--ext");
+	} else if (!args->getOption("--tld").empty()) {
+		config.tld = args->getOption("--tld");
 	} else if (!args->getOption("--htdocs").empty()) {
 		config.htdocs = args->getOption("--htdocs");
 	} else if (!args->getOption("--nginx").empty()) {
