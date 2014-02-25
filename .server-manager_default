@@ -1,0 +1,5 @@
+root=www
+htdocs=/home
+hosts=/etc/hosts
+nginx=/etc/nginx/sites-enabled
+tld=.dev
