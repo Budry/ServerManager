@@ -26,6 +26,9 @@ $ sudo server-manager remove <host-name> [options]
 * ```remove <host-name>```	- Remove virtual host and all project files
 
 ### Options:
+
+*Options has a higher priority than configuration in config file*
+
 * ```--root```		- Path to server root
 * ```--tld```		- Set server tld
 * ```--htdocs```	- Set path to htdocs directory
