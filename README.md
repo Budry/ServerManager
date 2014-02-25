@@ -8,6 +8,8 @@ Simply server manager for manage virtual hosts in nginx.
 2. Default command name is ```server-manager``` but you can change this if run installation script with command name argument.
 3. And next you must edit ```/home/user/.server-manager``` config file and fill your paths and configuration.
 
+*If you want set directory automatically use ```htdocs=pwd```*
+
 ## Usages
 
 **Important! Server manager must be run with sudo**

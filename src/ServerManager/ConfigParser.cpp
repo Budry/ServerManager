@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+#include <limits.h>
+#include <unistd.h>
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
@@ -40,7 +42,11 @@ Configuration ConfigParser::getConfiguration()
 				} else if (key.compare("tld") == 0) {
 					cfg.tld = value;
 				} else if (key.compare("htdocs") == 0) {
-					cfg.htdocs = value;
+					if (value.compare("pwd") == 0) {
+						cfg.htdocs = getcwd(NULL, PATH_MAX + 1);
+					} else {
+						cfg.htdocs = value;
+					}
 				} else if (key.compare("nginx") == 0) {
 					cfg.nginx = value;
 				} else if (key.compare("hosts") == 0) {
