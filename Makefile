@@ -9,7 +9,6 @@
 
 CC = g++
 CFLAGS = -Wall -Wextra -pedantic
-TEST_DIR = tests/
 SOURCES = ./src/ServerManager/main.cpp \
 		  ./src/ServerManager/ConfigParser.cpp \
 		  ./src/ServerManager/ArgumentParser.cpp \
