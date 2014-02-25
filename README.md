@@ -9,6 +9,8 @@ $ sudo sh install.sh [command-name]
 ```
 Default command name is ```server-manager``` but you can change this if run installation script with command name argument.
 
+And next you must edit ```/home/user/.server-manager``` config file and fill your paths and configuration.
+
 ## Usages
 
 **Important! Server manager must be run with sudo**
