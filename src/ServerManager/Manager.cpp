@@ -9,7 +9,6 @@
 
 #include <string>
 #include <fstream>
-#include <iostream>
 #include <cstdlib>
 #include <sstream>
 #include "./Manager.h"
