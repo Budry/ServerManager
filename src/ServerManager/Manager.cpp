@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
+#include <sstream>
 #include "./Manager.h"
 #include "./Configuration.h"
 
@@ -26,14 +27,21 @@ void Manager::setConfiguration(Configuration config)
 string Manager::getList()
 {
 	ifstream file(this->config.hosts.c_str());
+	string line;
+	string result;
 	if (file.good()) {
-		string content(
-			(istreambuf_iterator<char>(file)),
-			(istreambuf_iterator<char>())
-		);
+		while(getline(file, line)) {
+			istringstream line_string(line);
+			string key;
+			if (getline(line_string, key, '\t')) {
+				if (key.compare("127.0.0.1") == 0) {
+					result.append(line + "\n");
+				}
+			}
+		}
 		file.close();
 
-		return content;
+		return result;
 	} else {
 		file.close();
 		throw "Invalid hosts file";	
