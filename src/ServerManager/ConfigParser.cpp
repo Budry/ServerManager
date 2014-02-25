@@ -46,7 +46,7 @@ Configuration ConfigParser::getConfiguration()
 				} else if (key.compare("hosts") == 0) {
 					cfg.hosts = value;
 				} else {
-					// ERROR
+					throw "Unsupported option";
 				}
 			}
 		}
