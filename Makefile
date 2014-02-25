@@ -1,5 +1,5 @@
 ##
-# This file is part of the   package.
+# This file is part of ServerManager the package.
 #
 # (c) Ondřej Záruba <zarubaondra@gmail.com>
 #
