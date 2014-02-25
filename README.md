@@ -1,5 +1,7 @@
 # ServerManager
 
+Simply server manager for manage virtual hosts in nginx.
+
 ## Installation
 
 1. Run  ```$ sudo sh install.sh [command-name]```
