@@ -27,6 +27,7 @@ make -B
 if [ -f ${COMMAND} ]
 then
 	echo "Command ${COMMAND} already exist!"
+	rm ${CONFIG_PATH} -rf
 	exit 1
 else
 	cp build/server-manager ${COMMAND}
