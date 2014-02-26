@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+#include <limits.h>
+#include <unistd.h>
 #include "./Configurator.h"
 #include "./ArgumentParser.h"
 #include "./Configuration.h"
@@ -22,7 +24,11 @@ Configuration Configurator::applyOptions(Configuration config, ArgumentParser* a
 	} else if (!args->getOption("--tld").empty()) {
 		config.tld = args->getOption("--tld");
 	} else if (!args->getOption("--htdocs").empty()) {
-		config.htdocs = args->getOption("--htdocs");
+		if (args->getOption("--htdocs").compare("pwd") == 0) {
+			config.htdocs = getcwd(NULL, PATH_MAX + 1);
+		} else {
+			config.htdocs = args->getOption("--htdocs");
+		}
 	} else if (!args->getOption("--nginx").empty()) {
 		config.nginx = args->getOption("--nginx");
 	} else if (!args->getOption("--hosts").empty()) {
