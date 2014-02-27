@@ -27,6 +27,7 @@ namespace ServerManager
 			string create(string hostName);
 			string remove(string hostName);
 		private:
+			void appendLine(string* result, string key, string line);
 			Configuration config;
 	};
 }

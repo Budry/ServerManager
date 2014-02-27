@@ -23,6 +23,13 @@ void Manager::setConfiguration(Configuration config)
 	this->config = config;
 }
 
+void Manager::appendLine(string* result,string key, string line)
+{
+	if (key.compare("127.0.0.1") == 0) {
+		(*result).append(line + "\n");
+	}
+}
+
 string Manager::getList()
 {
 	ifstream file(this->config.hosts.c_str());
@@ -34,15 +41,11 @@ string Manager::getList()
 			string key;
 			if (line.find(" ") != std::string::npos) {
 				if (getline(line_string, key, ' ')) {
-					if (key.compare("127.0.0.1") == 0) {
-						result.append(line + "\n");
-					}
+					this->appendLine(&result, key, line);
 				}
 			} else {
 				if (getline(line_string, key, '\t')) {
-					if (key.compare("127.0.0.1") == 0) {
-						result.append(line + "\n");
-					}
+					this->appendLine(&result, key, line);
 				}
 					
 			}
