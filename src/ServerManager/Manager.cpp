@@ -138,7 +138,7 @@ string Manager::remove(string hostName)
 				newContent.append(line + "\n");
 			}
 		}
-		ofstream ohostFile(this->config.hosts.c_str()/*, ios_base::app | ios_base::out*/);
+		ofstream ohostFile(this->config.hosts.c_str());
 		ohostFile << newContent;
 		result.append("\nVirtual host has been removed from hosts file");
 		ihostFile.close();
