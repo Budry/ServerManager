@@ -11,9 +11,6 @@ then
 	if [ "$rewrite" = "y" ]
 	then
 		cp .server-manager_default ${CONFIG_PATH}
-	else
-		echo "Install terminated"
-		exit 1
 	fi
 else
 	cp .server-manager_default ${CONFIG_PATH}
@@ -33,9 +30,16 @@ make -B
 
 if [ -f ${COMMAND} ]
 then
-	echo "Command ${COMMAND} already exist!"
-	rm ${CONFIG_PATH} -rf
-	exit 1
+	echo "Binnary file ${COMMAND} already exist. Do we can overwrite it? (Y/n):"
+	read rewrite
+	if [ "$rewrite" = "y" ]
+	then
+		cp build/server-manager ${COMMAND} -f
+	else
+		rm ${CONFIG_PATH} -rf
+		echo "Install terminated"
+		exit 1
+	fi
 else
 	cp build/server-manager ${COMMAND}
 fi
