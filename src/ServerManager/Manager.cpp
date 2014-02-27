@@ -32,10 +32,19 @@ string Manager::getList()
 		while(getline(file, line)) {
 			istringstream line_string(line);
 			string key;
-			if (getline(line_string, key, '\t')) {
-				if (key.compare("127.0.0.1") == 0) {
-					result.append(line + "\n");
+			if (line.find(" ") != std::string::npos) {
+				if (getline(line_string, key, ' ')) {
+					if (key.compare("127.0.0.1") == 0) {
+						result.append(line + "\n");
+					}
 				}
+			} else {
+				if (getline(line_string, key, '\t')) {
+					if (key.compare("127.0.0.1") == 0) {
+						result.append(line + "\n");
+					}
+				}
+					
 			}
 		}
 		file.close();
