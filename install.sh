@@ -34,7 +34,8 @@ then
 	read rewrite
 	if [ "$rewrite" = "y" ] || [ "$rewrite" = "Y" ]
 	then
-		cp build/server-manager ${COMMAND} -f
+		rm ${COMMAND} -rf
+		cp build/server-manager ${COMMAND}
 	else
 		rm ${CONFIG_PATH} -rf
 		echo "Install terminated"
