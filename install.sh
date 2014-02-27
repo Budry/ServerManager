@@ -8,7 +8,7 @@ if [ -f ${CONFIG_PATH} ]
 then
 	echo "ServerManager need ~/.server-manager file for store default configuration. Do we can overwrite it? (Y/n):"
 	read rewrite
-	if [ "$rewrite" = "y" ]
+	if [ "$rewrite" = "y" ] || [ "$rewrite" = "Y" ]
 	then
 		cp .server-manager_default ${CONFIG_PATH}
 	fi
@@ -32,7 +32,7 @@ if [ -f ${COMMAND} ]
 then
 	echo "Binnary file ${COMMAND} already exist. Do we can overwrite it? (Y/n):"
 	read rewrite
-	if [ "$rewrite" = "y" ]
+	if [ "$rewrite" = "y" ] || [ "$rewrite" = "Y" ]
 	then
 		cp build/server-manager ${COMMAND} -f
 	else
