@@ -12,7 +12,6 @@
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
-#include <iostream>
 #include "./ConfigParser.h"
 #include "./Configuration.h"
 
