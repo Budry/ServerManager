@@ -55,7 +55,7 @@ string Manager::getList()
 		return result;
 	} else {
 		file.close();
-		throw "Invalid hosts file";	
+		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 	}
 }
 
@@ -71,7 +71,7 @@ string Manager::create(string hostName)
 		hostsFile.close();
 	} else {
 		hostsFile.close();
-		throw "Invalid hosts file";
+		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 	}
 	string path = this->config.nginx;
 	path.append("/");
@@ -104,7 +104,7 @@ string Manager::create(string hostName)
 		nginxConfig.close();
 	} else {
 		nginxConfig.close();
-		throw "Nginx config file has not been created";
+		throw "Invalid path to nginx sites-enabled directory or you don't run as administrator(sudo)";
 	}
 	result.append("\nStarting nginx");
 	system("nginx");
@@ -125,12 +125,12 @@ string Manager::remove(string hostName)
 	if (system(rmProject.c_str()) == 0) {
 		result.append("\nProject directory has been removed");
 	} else {
-		throw "Project path has not been removed";
+		throw "Invalid path to host(project) directory or you don't run as administrator(sudo)";
 	}
 	if (system(rmNginxConf.c_str()) == 0) {
 		result.append("\nNginx configuration has been removed");
 	} else {
-		throw "Nginx configuration has not been removed";
+		throw "Invalid path to nginx sites-enabled directory or you don't run as administrator(sudo)";
 	}
 	ifstream ihostFile(this->config.hosts.c_str());
 	if (ihostFile.good()) {
@@ -147,7 +147,7 @@ string Manager::remove(string hostName)
 		ihostFile.close();
 		ohostFile.close();
 	} else {
-		throw "Invalid hosts file";
+		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 		ihostFile.close();
 	}
 	result.append("\nStarting nginx");
