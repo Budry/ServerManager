@@ -15,6 +15,7 @@
 #include "./Configuration.h"
 
 using namespace ServerManager;
+using namespace std;
 
 namespace ServerManager
 {
