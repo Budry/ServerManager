@@ -31,21 +31,20 @@ int main(int argc, char** argv)
 		ArgumentParser* argsParser = new ArgumentParser(argc, argv);
 		Configurator* configurator = new Configurator();
 		Manager* manager = new Manager();
+		config = configurator->applyOptions(config, argsParser);
 		if (argsParser->getAction().compare("list") == 0) {
-			manager->setConfiguration(config);
 			cout << formateSuccess("List of virtual hosts:") << endl;
+			manager->setConfiguration(config);
 			cout << formateProcess(manager->getList()) << endl;
 		} else if (argsParser->getAction().compare("create") == 0) {
 			if (argsParser->getParam().empty()) {
 				throw "Missing host name";
 			}
 			cout << formateProcess("Creating virtual host:") << endl;
-			config = configurator->applyOptions(config, argsParser);
 			manager->setConfiguration(config);
 			cout << formateSuccess(manager->create(argsParser->getParam())) << endl;
 		} else if (argsParser->getAction().compare("remove") == 0) {
 			cout << formateProcess("Removing virtual host:") << endl;
-			config = configurator->applyOptions(config, argsParser);
 			manager->setConfiguration(config);
 			cout << formateSuccess(manager->remove(argsParser->getParam())) << endl;		
 		} else {

@@ -18,16 +18,26 @@ using namespace std;
 
 ArgumentParser::ArgumentParser(int argc, char** argv)
 {
-	int i;
-	if (argc == 2) {
+	int i,start;
+	if (argc >= 2) {
 		this->action = argv[1];
-	} else if (argc >= 3) {
-		this->action = argv[1];
-		if ((argc - 3) % 2 != 0) {
-			throw "Missing option value";
+		if (this->action.compare("list") == 0) {
+			if ((argc - 2) % 2 != 0) {
+				throw "Missing option value";
+			}
+			start = 2;
+		} else {
+			if (argc >= 3) {
+				if ((argc - 3) % 2 != 0) {
+					throw "Missing option value";
+				}
+				this->param = argv[2];
+				start = 3;
+			} else {
+				throw "Invalid arguments";
+			}
 		}
-		this->param = argv[2];
-		for (i = 3; i < argc; i++) {
+		for (i = start; i < argc; i++) {
 			this->argv.push_back(argv[i]);
 		}
 	} else {
