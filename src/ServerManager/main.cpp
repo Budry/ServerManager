@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 		} else if (argsParser->getAction().compare("remove") == 0) {
 			cout << formateProcess("Removing virtual host:") << endl;
 			manager->setConfiguration(config);
-			cout << formateSuccess(manager->remove(argsParser->getParam())) << endl;		
+			cout << formateSuccess(manager->remove(argsParser->getParam())) << endl;
 		} else {
 			cout << formateProcess(HELP) << endl;
 		}	
