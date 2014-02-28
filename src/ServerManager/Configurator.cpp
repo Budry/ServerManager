@@ -32,7 +32,7 @@ Configuration Configurator::applyOptions(Configuration config, ArgumentParser* a
 	} else if (!args->getOption("--nginx").empty()) {
 		config.nginx = args->getOption("--nginx");
 	} else if (!args->getOption("--hosts").empty()) {
-		config.htdocs = args->getOption("--hosts");
+		config.hosts = args->getOption("--hosts");
 	}
 
 	return config;
