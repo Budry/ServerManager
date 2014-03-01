@@ -26,6 +26,7 @@ namespace ServerManager
 			string getList();
 			string create(string hostName);
 			string remove(string hostName);
+			bool search(string hostName);
 		private:
 			void appendLine(string* result, string key, string line);
 			Configuration config;

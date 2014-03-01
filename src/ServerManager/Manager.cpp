@@ -15,6 +15,7 @@
 #include "./Configuration.h"
 
 using namespace ServerManager;
+using namespace std;
 
 Manager::Manager(){}
 
@@ -28,6 +29,25 @@ void Manager::appendLine(string* result,string key, string line)
 	if (key.compare("127.0.0.1") == 0) {
 		(*result).append(line + "\n");
 	}
+}
+
+bool Manager::search(string hostName)
+{
+	string result;
+	FILE* stream;
+	char buffer[256];
+	string cmd = "cat " + this->config.hosts + " | grep " + hostName  + " 2>&1";
+	stream = popen(cmd.c_str(), "r");
+	if (stream) {
+		while (!feof(stream)) {
+			if (fgets(buffer, 256, stream) != NULL) {
+				result.append(buffer);
+			}
+		}
+		pclose(stream);
+	}
+
+	return !result.empty();
 }
 
 string Manager::getList()
