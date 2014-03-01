@@ -28,6 +28,7 @@ $ sudo server-manager remove <host-name> [options]
 * ```list```				- Display list of created virtual hosts
 * ```create <host-name>```	- Create a new virtual host with <host-name> name
 * ```remove <host-name>```	- Remove virtual host and all project files
+* ```search <host-name>```	- Search if host with <host-name> exist
 
 ### Options:
 
