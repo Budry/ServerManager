@@ -62,13 +62,13 @@ int main(int argc, char** argv)
 			cout << formateProcess(HELP) << endl;
 		}	
 	} catch(const char* e) {
-		cerr << formateError(e) << endl;
+		cerr << formateThrow(e) << endl;
 	}
 
 	return 0;
 }
 
-string formateError(string message)
+string formateThrow(string message)
 {
 	string formated = "\033[0;41m";
 	formated.append(message);
@@ -80,6 +80,15 @@ string formateError(string message)
 string formateSuccess(string message)
 {
 	string formated = "\033[0;32m";
+	formated.append(message);
+	formated.append("\033[0m");
+
+	return formated;
+}
+
+string formateError(string message)
+{
+	string formated = "\033[0;31m";
 	formated.append(message);
 	formated.append("\033[0m");
 

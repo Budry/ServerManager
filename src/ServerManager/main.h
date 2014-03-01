@@ -29,6 +29,7 @@ const char* HELP = "ServerManager v1.0.0\n" \
 					"\t--hosts\t- Set path to hosts file (example: /etc/hosts)\n";
 
 string formateError(string message);
+string formateThrow(string message);
 string formateSuccess(string message);
 string formateProcess(string message);
 
