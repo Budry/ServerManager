@@ -19,9 +19,10 @@ Simply server manager for manage virtual hosts in nginx.
 **Important! Server manager must be run with sudo**
 
 ```shell
-$ sudo server-mamager list
+$ sudo server-mamager list [options]
 $ sudo server-manager create <host-name> [options]
 $ sudo server-manager remove <host-name> [options]
+$ sudo server-manager search <host-name> [options]
 ```
 
 ### Actions:
