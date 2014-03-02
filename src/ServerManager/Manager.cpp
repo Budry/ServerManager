@@ -157,7 +157,7 @@ string Manager::remove(string hostName)
 		string line;
 		string newContent = "";
 		while(getline(ihostFile, line)) {
-			if (line.compare("127.0.0.1\t" + hostName + this->config.tld) != 0 && !line.empty())  {
+			if (line.compare("127.0.0.1\t" + hostName + this->config.tld) != 0 && !line.empty() && line.compare("127.0.0.1 " + hostName + this->config.tld) != 0)  {
 				newContent.append(line + "\n");
 			}
 		}
