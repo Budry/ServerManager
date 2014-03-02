@@ -29,9 +29,8 @@ string Manager::search(string hostName)
 {
 	string cmd = "cat " + this->config.hosts + " | grep " + hostName;
 	Console console(cmd);
-	string result = console.exec();
 
-	return result;
+	return console.exec();
 }
 
 string Manager::getList()
