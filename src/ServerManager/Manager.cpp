@@ -24,38 +24,6 @@ void Manager::setConfiguration(Configuration config)
 	this->config = config;
 }
 
-void Manager::appendLine(string* result,string key, string line)
-{
-	if (key.compare("127.0.0.1") == 0) {
-		(*result).append(line + "\n");
-	}
-}
-
-string Manager::getServerConfig(string hostName)
-{
-	string config = "server {\n" \
-					 "\tlisten 80;\n" \
-					 "\tserver_name " + hostName + this->config.tld + ";\n" \
-					 "\troot " + this->config.htdocs + "/" + hostName + "/" + this->config.root + ";\n" \
-					 "\n" \
-					 "\terror_log " + this->config.htdocs + "/" + hostName + "/log/" + hostName + "_error.log;\n" \
-					 "\taccess_log " + this->config.htdocs + "/" + hostName + "/log/" + hostName + "_accesslog.log;\n" \
-					 "\n" \
-					 "\tinclude common/common.conf;\n" \
-					 "\tinclude common/php.conf;\n" \
-					 "\tinclude common/nette.conf;\n" \
-					 "}\n";
-
-	return config;
-}
-
-string Manager::getHostConfig(string hostName, string delimiter = "\t")
-{
-	string host = "127.0.0.1" + delimiter + hostName + this->config.tld;
-
-	return host;
-}
-
 bool Manager::search(string hostName)
 {
 	string result;
@@ -188,4 +156,36 @@ string Manager::remove(string hostName)
 	system("nginx");
 
 	return result;
+}
+
+void Manager::appendLine(string* result,string key, string line)
+{
+	if (key.compare("127.0.0.1") == 0) {
+		(*result).append(line + "\n");
+	}
+}
+
+string Manager::getServerConfig(string hostName)
+{
+	string config = "server {\n" \
+					 "\tlisten 80;\n" \
+					 "\tserver_name " + hostName + this->config.tld + ";\n" \
+					 "\troot " + this->config.htdocs + "/" + hostName + "/" + this->config.root + ";\n" \
+					 "\n" \
+					 "\terror_log " + this->config.htdocs + "/" + hostName + "/log/" + hostName + "_error.log;\n" \
+					 "\taccess_log " + this->config.htdocs + "/" + hostName + "/log/" + hostName + "_accesslog.log;\n" \
+					 "\n" \
+					 "\tinclude common/common.conf;\n" \
+					 "\tinclude common/php.conf;\n" \
+					 "\tinclude common/nette.conf;\n" \
+					 "}\n";
+
+	return config;
+}
+
+string Manager::getHostConfig(string hostName, string delimiter)
+{
+	string host = "127.0.0.1" + delimiter + hostName + this->config.tld;
+
+	return host;
 }
