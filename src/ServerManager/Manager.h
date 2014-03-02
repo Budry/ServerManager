@@ -30,6 +30,7 @@ namespace ServerManager
 		private:
 			void appendLine(string* result, string key, string line);
 			string getServerConfig(string hostName);
+			string getHostConfig(string hostName, string delimiter);
 			Configuration config;
 	};
 }

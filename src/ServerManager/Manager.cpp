@@ -49,6 +49,13 @@ string Manager::getServerConfig(string hostName)
 	return config;
 }
 
+string Manager::getHostConfig(string hostName, string delimiter = "\t")
+{
+	string host = "127.0.0.1" + delimiter + hostName + this->config.tld;
+
+	return host;
+}
+
 bool Manager::search(string hostName)
 {
 	string result;
@@ -104,7 +111,7 @@ string Manager::create(string hostName)
 	system("nginx -s stop");
 	ofstream hostsFile(this->config.hosts.c_str(), ios_base::app | ios_base::out);
 	if (hostsFile.good()) {
-		hostsFile << endl << "127.0.0.1\t" << hostName << this->config.tld;
+		hostsFile << endl << this->getHostConfig(hostName);
 		result.append("\nAdded virtual host into hosts file");
 		hostsFile.close();
 	} else {
@@ -164,7 +171,7 @@ string Manager::remove(string hostName)
 		string line;
 		string newContent = "";
 		while(getline(ihostFile, line)) {
-			if (line.compare("127.0.0.1\t" + hostName + this->config.tld) != 0 && !line.empty() && line.compare("127.0.0.1 " + hostName + this->config.tld) != 0)  {
+			if (line.compare(this->getHostConfig(hostName)) != 0 && !line.empty() && line.compare(this->getHostConfig(hostName, " ")) != 0)  {
 				newContent.append(line + "\n");
 			}
 		}
