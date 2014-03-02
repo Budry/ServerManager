@@ -13,6 +13,7 @@
 #include <sstream>
 #include "./Manager.h"
 #include "./Configuration.h"
+#include "./Console.h"
 
 using namespace ServerManager;
 using namespace std;
@@ -24,23 +25,13 @@ void Manager::setConfiguration(Configuration config)
 	this->config = config;
 }
 
-bool Manager::search(string hostName)
+string Manager::search(string hostName)
 {
-	string result;
-	FILE* stream;
-	char buffer[256];
-	string cmd = "cat " + this->config.hosts + " | grep " + hostName  + " 2>&1";
-	stream = popen(cmd.c_str(), "r");
-	if (stream) {
-		while (!feof(stream)) {
-			if (fgets(buffer, 256, stream) != NULL) {
-				result.append(buffer);
-			}
-		}
-		pclose(stream);
-	}
+	string cmd = "cat " + this->config.hosts + " | grep " + hostName;
+	Console console(cmd);
+	string result = console.exec();
 
-	return !result.empty();
+	return result;
 }
 
 string Manager::getList()
@@ -75,8 +66,10 @@ string Manager::getList()
 string Manager::create(string hostName)
 {
 	string result;
-	result.append("Stoping nginx");
-	system("nginx -s stop");
+	Console console("nginx -s stop");
+	if (console.exec().empty()) {
+		result.append("Stoping nginx");
+	}
 	ofstream hostsFile(this->config.hosts.c_str(), ios_base::app | ios_base::out);
 	if (hostsFile.good()) {
 		hostsFile << endl << this->getHostConfig(hostName);
@@ -93,9 +86,9 @@ string Manager::create(string hostName)
 		if(nginxConfig.good()) {
 			result.append("\nAdded virtual host nginx configuration");
 		}
-		string mkdirLog = "mkdir -p " + this->config.htdocs + "/" + hostName + "/log";
-		string mkdirRoot = "mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.root;
-		if (system(mkdirLog.c_str()) == 0 && system(mkdirRoot.c_str()) == 0) {
+		Console mkdirLog("mkdir -p " + this->config.htdocs + "/" + hostName + "/log");
+		Console mkdirRoot("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.root);
+		if (mkdirLog.exec().empty() && mkdirRoot.exec().empty()) {
 			result.append("\nCreated base project directories: ");
 			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/log");
 			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.root);
@@ -105,11 +98,14 @@ string Manager::create(string hostName)
 		nginxConfig.close();
 		throw "Invalid path to nginx sites-enabled directory or you don't run as administrator(sudo)";
 	}
-	result.append("\nStarting nginx");
-	system("nginx");
-	result.append("Set chmod");
-	string chmodCmd = "chmod -R 0777 " + this->config.htdocs + "/" + hostName;
-	system(chmodCmd.c_str());
+	Console nginxStart("nginx");
+	if (nginxStart.exec().empty()) {
+		result.append("\nStarting nginx");
+	}
+	Console chmodCmd("chmod -R 0777 " + this->config.htdocs + "/" + hostName);
+	if (chmodCmd.exec().empty()) {
+		result.append("\nSet chmod");
+	}
 
 	return result;
 }
@@ -117,16 +113,18 @@ string Manager::create(string hostName)
 string Manager::remove(string hostName)
 {
 	string result;
-	result.append("Stoping nginx");
-	system("nginx -s stop");
-	string rmProject = "rm -rf " + this->config.htdocs + "/" + hostName;
-	string rmNginxConf = "rm -rf " + this->config.nginx + "/" + hostName + ".conf";
-	if (system(rmProject.c_str()) == 0) {
+	Console console("nginx -s stop");
+	if (console.exec().empty()) {
+		result.append("Stoping nginx");
+	}
+	Console rmProject("rm -rf " + this->config.htdocs + "/" + hostName);
+	Console rmNginxConf("rm -rf " + this->config.nginx + "/" + hostName + ".conf");
+	if (rmProject.exec().empty()) {
 		result.append("\nProject directory has been removed");
 	} else {
 		throw "Invalid path to host(project) directory or you don't run as administrator(sudo)";
 	}
-	if (system(rmNginxConf.c_str()) == 0) {
+	if (rmNginxConf.exec().empty()) {
 		result.append("\nNginx configuration has been removed");
 	} else {
 		throw "Invalid path to nginx sites-enabled directory or you don't run as administrator(sudo)";
@@ -149,8 +147,10 @@ string Manager::remove(string hostName)
 		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 		ihostFile.close();
 	}
-	result.append("\nStarting nginx");
-	system("nginx");
+	Console nginxStart("nginx");
+	if (nginxStart.exec().empty()) {
+		result.append("\nStarting nginx");
+	}
 
 	return result;
 }
