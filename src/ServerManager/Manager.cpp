@@ -31,7 +31,7 @@ void Manager::appendLine(string* result,string key, string line)
 	}
 }
 
-string Manager::getHostConfig(string hostName)
+string Manager::getServerConfig(string hostName)
 {
 	string config = "server {\n" \
 					 "\tlisten 80;\n" \
@@ -117,7 +117,7 @@ string Manager::create(string hostName)
 	path.append(".conf");
 	ofstream nginxConfig(path.c_str());
 	if (nginxConfig.good()) {
-		nginxConfig << this->getHostConfig(hostName);
+		nginxConfig << this->getServerConfig(hostName);
 		if(nginxConfig.good()) {
 			result.append("\nAdded virtual host nginx configuration");
 		}
