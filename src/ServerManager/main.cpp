@@ -49,15 +49,10 @@ int main(int argc, char** argv)
 			cout << formateSuccess(manager->remove(argsParser->getParam())) << endl;
 		} else if (argsParser->getAction().compare("search") == 0) {
 			manager->setConfiguration(config);
-			if (manager->search(argsParser->getParam())) {
-				cout << formateSuccess("Host ");
-				cout <<	formateProcess(argsParser->getParam());
-				cout << formateSuccess(" has been found!") << endl;
-			} else {
-				cout << formateError("Host ");
-				cout << formateProcess(argsParser->getParam());
-				cout << formateError(" has not been found!") << endl;
-			}
+			cout << formateSuccess("Host ");
+			cout <<	formateProcess(argsParser->getParam());
+			cout << formateSuccess(" has been found in:") << endl;
+			cout << formateProcess(manager->search(argsParser->getParam())) << endl;
 		} else {
 			cout << formateProcess(HELP) << endl;
 		}	
