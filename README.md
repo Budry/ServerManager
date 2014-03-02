@@ -1,6 +1,6 @@
 # ServerManager
 
-Simply server manager for manage virtual hosts in nginx.
+Simply server manager for manage virtual hosts in nginx and Linux.
 
 ## Requirements
 
