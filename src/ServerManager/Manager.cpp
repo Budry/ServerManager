@@ -31,6 +31,24 @@ void Manager::appendLine(string* result,string key, string line)
 	}
 }
 
+string Manager::getHostConfig(string hostName)
+{
+	string config = "server {\n" \
+					 "\tlisten 80;\n" \
+					 "\tserver_name " + hostName + this->config.tld + ";\n" \
+					 "\troot " + this->config.htdocs + "/" + hostName + "/" + this->config.root + ";\n" \
+					 "\n" \
+					 "\terror_log " + this->config.htdocs + "/" + hostName + "/log/" + hostName + "_error.log;\n" \
+					 "\taccess_log " + this->config.htdocs + "/" + hostName + "/log/" + hostName + "_accesslog.log;\n" \
+					 "\n" \
+					 "\tinclude common/common.conf;\n" \
+					 "\tinclude common/php.conf;\n" \
+					 "\tinclude common/nette.conf;\n" \
+					 "}\n";
+
+	return config;
+}
+
 bool Manager::search(string hostName)
 {
 	string result;
@@ -99,18 +117,7 @@ string Manager::create(string hostName)
 	path.append(".conf");
 	ofstream nginxConfig(path.c_str());
 	if (nginxConfig.good()) {
-		nginxConfig << "server {" << endl 
-			<< "\tlisten 80;" << endl 
-			<< "\tserver_name " << hostName << this->config.tld << ";" << endl
-			<< "\troot " << this->config.htdocs << "/" << hostName << "/" << this->config.root << ";" << endl
-			<< endl
-			<< "\terror_log " << this->config.htdocs << "/" << hostName << "/log/" << hostName << "_error.log;" << endl
-			<< "\taccess_log " << this->config.htdocs << "/" << hostName << "/log/" << hostName << "_accesslog.log;" << endl
-			<< endl
-			<< "\tinclude common/common.conf;" << endl
-			<< "\tinclude common/php.conf;" << endl
-			<< "\tinclude common/nette.conf;" << endl
-			<< "}";
+		nginxConfig << this->getHostConfig(hostName);
 		if(nginxConfig.good()) {
 			result.append("\nAdded virtual host nginx configuration");
 		}

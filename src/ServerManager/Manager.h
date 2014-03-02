@@ -29,6 +29,7 @@ namespace ServerManager
 			bool search(string hostName);
 		private:
 			void appendLine(string* result, string key, string line);
+			string getHostConfig(string hostName);
 			Configuration config;
 	};
 }
