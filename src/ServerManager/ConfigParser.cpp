@@ -29,6 +29,9 @@ Configuration ConfigParser::getConfiguration()
 {
 	Configuration cfg;
 	ifstream file(this->configFile.c_str());
+	if (!file.good()) {
+		throw "Missing config file ~/.server-manager";
+	}
 	string line;
 	while(getline(file, line)) {
 		istringstream line_string(line);
