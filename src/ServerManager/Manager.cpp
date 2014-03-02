@@ -36,8 +36,7 @@ string Manager::search(string hostName)
 string Manager::getList()
 {
 	ifstream file(this->config.hosts.c_str());
-	string line;
-	string result;
+	string line, result;
 	if (file.good()) {
 		while(getline(file, line)) {
 			istringstream line_string(line);
