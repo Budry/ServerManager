@@ -86,10 +86,7 @@ string Manager::create(string hostName)
 		hostsFile.close();
 		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 	}
-	string path = this->config.nginx;
-	path.append("/");
-	path.append(hostName);
-	path.append(".conf");
+	string path = this->config.nginx + "/" + hostName + ".conf";
 	ofstream nginxConfig(path.c_str());
 	if (nginxConfig.good()) {
 		nginxConfig << this->getServerConfig(hostName);
