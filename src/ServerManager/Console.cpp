@@ -9,6 +9,7 @@
 
 #include <string>
 #include <fstream>
+#include <iostream>
 #include "./Console.h"
 
 using namespace ServerManager;
@@ -31,7 +32,7 @@ void Console::addCommand(string command)
 string Console::exec()
 {
 	string result;
-	const int BUFFER_MAX = 256;
+	const int BUFFER_MAX = 4096;
 	FILE* stream;
 	char buffer[BUFFER_MAX];
 	stream = popen(this->command.c_str(), "r");
