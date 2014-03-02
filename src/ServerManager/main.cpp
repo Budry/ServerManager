@@ -37,9 +37,6 @@ int main(int argc, char** argv)
 			manager->setConfiguration(config);
 			cout << formateProcess(manager->getList()) << endl;
 		} else if (argsParser->getAction().compare("create") == 0) {
-			if (argsParser->getParam().empty()) {
-				throw "Missing host name";
-			}
 			cout << formateProcess("Creating virtual host:") << endl;
 			manager->setConfiguration(config);
 			cout << formateSuccess(manager->create(argsParser->getParam())) << endl;
