@@ -129,8 +129,7 @@ string Manager::remove(string hostName)
 	}
 	ifstream ihostFile(this->config.hosts.c_str());
 	if (ihostFile.good()) {
-		string line;
-		string newContent = "";
+		string line, newContent = "";
 		while(getline(ihostFile, line)) {
 			if (line.compare(this->getHostConfig(hostName)) != 0 && !line.empty() && line.compare(this->getHostConfig(hostName, " ")) != 0)  {
 				newContent.append(line + "\n");
