@@ -9,7 +9,6 @@
 
 #include <string>
 #include <fstream>
-#include <iostream>
 #include "./Console.h"
 
 using namespace ServerManager;
