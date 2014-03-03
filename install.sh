@@ -37,7 +37,6 @@ then
 		rm ${COMMAND} -rf
 		cp build/server-manager ${COMMAND}
 	else
-		rm ${CONFIG_PATH} -rf
 		echo "Install terminated"
 		exit 1
 	fi
