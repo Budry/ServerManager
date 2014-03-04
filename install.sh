@@ -1,19 +1,19 @@
 #!/bin/bash
 
-CONFIG_PATH="${HOME}/.server-manager"
+CONFIG_PATH="${HOME}/.server-manager/"
 USER_BIN="/usr/local/bin/"
 COMMAND_NAME="server-manager"
 
-if [ -f ${CONFIG_PATH} ] 
+if [ -d ${CONFIG_PATH} ]
 then
-	echo "ServerManager need ~/.server-manager file for store default configuration. Do we can overwrite it? (Y/n):"
+	echo "ServerManager need ~/.server-manager/ directory for store default configuration. Do we can overwrite it? (Y/n):"
 	read rewrite
 	if [ "$rewrite" = "y" ] || [ "$rewrite" = "Y" ]
 	then
-		cp .server-manager_default ${CONFIG_PATH}
+		cp .server-manager/ ${CONFIG_PATH} -r
 	fi
 else
-	cp .server-manager_default ${CONFIG_PATH}
+	cp .server-manager/ ${CONFIG_PATH}
 fi
 
 chmod -R 0777 ${CONFIG_PATH}
