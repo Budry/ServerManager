@@ -10,10 +10,11 @@ then
 	read rewrite
 	if [ "$rewrite" = "y" ] || [ "$rewrite" = "Y" ]
 	then
+		rm ${CONFIG_PATH} -rf
 		cp .server-manager/ ${CONFIG_PATH} -r
 	fi
 else
-	cp .server-manager/ ${CONFIG_PATH}
+	cp .server-manager/ ${CONFIG_PATH} -r
 fi
 
 chmod -R 0777 ${CONFIG_PATH}
