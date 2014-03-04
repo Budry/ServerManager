@@ -19,10 +19,13 @@ Files::Files() {}
 string Files::getString(string path)
 {
 	ifstream file(path.c_str());
+	string content, line;
 	if (!file.good()) {
 		throw "Invalid file";
 	}
-	string content((istreambuf_iterator<char>(file)), (istreambuf_iterator<char>()));
+	while (getline(file, line)) {
+		content.append(line);
+	}
 	file.close();
 
 	return content;
