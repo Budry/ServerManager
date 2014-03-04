@@ -22,8 +22,8 @@ namespace ServerManager
 		string htdocs;
 		string nginx;
 		string hosts;
-		string _systemTemplate;
-		string _serverTemplate;
+		string systemTemplate;
+		string serverTemplate;
 	} Configuration;
 }
 

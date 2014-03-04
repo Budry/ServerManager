@@ -34,9 +34,9 @@ Configuration Configurator::applyOptions(Configuration config, ArgumentParser* a
 	} else if (!args->getOption("--hosts").empty()) {
 		config.hosts = args->getOption("--hosts");
 	} else if (!args->getOption("--serverTemplate").empty()) {
-		config._serverTemplate = args->getOption("--serverTemplate");
+		config.serverTemplate = args->getOption("--serverTemplate");
 	} else if (!args->getOption("--systemTemplate").empty()) {
-		config._systemTemplate = args->getOption("--serverTemplate");
+		config.systemTemplate = args->getOption("--serverTemplate");
 	}
 
 	return config;

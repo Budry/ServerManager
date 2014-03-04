@@ -165,7 +165,7 @@ string Manager::getServerConfig(string hostName)
 {
 	Files files;
 	Strings strings;
-	string content = files.getString(this->config._serverTemplate);
+	string content = files.getString(this->config.serverTemplate);
 	string config = strings.replace("%hostName%", hostName, content);
 	config = strings.replace("%tld%", this->config.tld, config);
 	config = strings.replace("%htdocs%", this->config.htdocs, config);
@@ -178,7 +178,7 @@ string Manager::getHostConfig(string hostName)
 {
 	Files files;
 	Strings strings;
-	string content = files.getString(this->config._systemTemplate);
+	string content = files.getString(this->config.systemTemplate);
 	string host = strings.replace("%hostName%", hostName, content);
 	host = strings.replace("%tld%", this->config.tld, host);
 
