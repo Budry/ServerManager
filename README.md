@@ -46,7 +46,7 @@ $ sudo server-manager search <host-name> [options]
 * ```--systemTemplate```	- Set template for host in system hosts file
 * ```--serverTemplate```	- Set template for server (apache/nginx/...) configuration
 
-**All default configuration are in ```/home/user/.server-manager``` file and you can change it.**
+**All default configuration are in ```/home/user/.server-manager/.server-manager``` file and you can change it.**
 
 ### Templates
 
