@@ -56,3 +56,7 @@ replaced by section in configuration file or by [options](#options) with same na
 
 If you can add custom template you must edit in config file section ```serverTemplate``` or ```systemTemplate``` or you can use
 options ```--serverTemplate <path>``` and ```---systemTemplate <path>```.
+
+Default options are:
+* [system tempalte](https://github.com/Budry/ServerManager/blob/template/.server-manager/templates/hosts)
+* [server template](https://github.com/Budry/ServerManager/blob/template/.server-manager/templates/nginx)
