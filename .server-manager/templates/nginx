@@ -1,0 +1,12 @@
+server { 
+	listen 80;
+	server_name %hostName%.%tld%;
+	root %htdocs%/%hostName%/%root%/; 
+
+	error_log %htdocs%/%hostName%/log/%hostName%_errors.log; 
+	access_log %htdocs%/%hostName%/log/%hostName%_access.log;
+	
+	include common/common.conf;
+	include common/php.conf;
+	include common/nette.conf;
+}
