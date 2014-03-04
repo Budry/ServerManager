@@ -14,6 +14,8 @@
 #include "./Manager.h"
 #include "./Configuration.h"
 #include "./Console.h"
+#include "./Files.h"
+#include "./Strings.h"
 
 using namespace ServerManager;
 using namespace std;
@@ -131,7 +133,7 @@ string Manager::remove(string hostName)
 	if (ihostFile.good()) {
 		string line, newContent = "";
 		while(getline(ihostFile, line)) {
-			if (line.compare(this->getHostConfig(hostName)) != 0 && !line.empty() && line.compare(this->getHostConfig(hostName, " ")) != 0)  {
+			if (line.compare(this->getHostConfig(hostName)) != 0 && !line.empty())  {
 				newContent.append(line + "\n");
 			}
 		}
@@ -161,25 +163,24 @@ void Manager::appendLine(string* result,string key, string line)
 
 string Manager::getServerConfig(string hostName)
 {
-	string config = "server {\n" \
-					 "\tlisten 80;\n" \
-					 "\tserver_name " + hostName + this->config.tld + ";\n" \
-					 "\troot " + this->config.htdocs + "/" + hostName + "/" + this->config.root + ";\n" \
-					 "\n" \
-					 "\terror_log " + this->config.htdocs + "/" + hostName + "/log/" + hostName + "_error.log;\n" \
-					 "\taccess_log " + this->config.htdocs + "/" + hostName + "/log/" + hostName + "_accesslog.log;\n" \
-					 "\n" \
-					 "\tinclude common/common.conf;\n" \
-					 "\tinclude common/php.conf;\n" \
-					 "\tinclude common/nette.conf;\n" \
-					 "}\n";
+	Files files;
+	Strings strings;
+	string content = files.getString(this->config._serverTemplate);
+	string config = strings.replace("%hostName%", hostName, content);
+	config = strings.replace("%tld%", this->config.tld, config);
+	config = strings.replace("%htdocs%", this->config.htdocs, config);
+	config = strings.replace("%root%", this->config.root, config);
 
 	return config;
 }
 
-string Manager::getHostConfig(string hostName, string delimiter)
+string Manager::getHostConfig(string hostName)
 {
-	string host = "127.0.0.1" + delimiter + hostName + this->config.tld;
+	Files files;
+	Strings strings;
+	string content = files.getString(this->config._systemTemplate);
+	string host = strings.replace("%hostName%", hostName, content);
+	host = strings.replace("%tld%", this->config.tld, host);
 
 	return host;
 }

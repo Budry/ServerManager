@@ -21,7 +21,7 @@ using namespace std;
 ConfigParser::ConfigParser()
 {
 	string path = getenv("HOME");
-	path.append("/.server-manager");
+	path.append("/.server-manager/.server-manager");
 	this->configFile = path;
 }
 
@@ -30,7 +30,7 @@ Configuration ConfigParser::getConfiguration()
 	Configuration cfg;
 	ifstream file(this->configFile.c_str());
 	if (!file.good()) {
-		throw "Missing config file ~/.server-manager";
+		throw "Missing config file ~/.server-manager/.server-manager";
 	}
 	string line;
 	while(getline(file, line)) {
@@ -53,6 +53,10 @@ Configuration ConfigParser::getConfiguration()
 					cfg.nginx = value;
 				} else if (key.compare("hosts") == 0) {
 					cfg.hosts = value;
+				} else if (key.compare("_systemTemplate") == 0) {
+					cfg._systemTemplate = value;
+				} else if (key.compare("_serverTemplate") == 0) {
+					cfg._serverTemplate = value;
 				} else {
 					throw "Unsupported option";
 				}

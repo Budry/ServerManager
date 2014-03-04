@@ -14,7 +14,9 @@ SOURCES = ./src/ServerManager/main.cpp \
 		  ./src/ServerManager/ArgumentParser.cpp \
 		  ./src/ServerManager/Manager.cpp \
 		  ./src/ServerManager/Configurator.cpp \
-		  ./src/ServerManager/Console.cpp
+		  ./src/ServerManager/Console.cpp \
+		  ./src/ServerManager/Strings.cpp \
+		  ./src/ServerManager/Files.cpp
 
 build: $(SOURCES)
 	$(CC) $(CFLAGS) -o build/server-manager $(SOURCES)

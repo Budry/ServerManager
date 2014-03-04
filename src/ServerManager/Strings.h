@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-#ifndef SERVERMANAGER_CONFIGURATION
-#define SERVERMANAGER_CONFIGURATION
+#ifndef SERVERMANAGER_STRINGS
+#define SERVERMANAGER_STRINGS
 
 #include <string>
 
@@ -16,15 +16,12 @@ using namespace std;
 
 namespace ServerManager
 {
-	typedef struct {
-		string root;
-		string tld;
-		string htdocs;
-		string nginx;
-		string hosts;
-		string _systemTemplate;
-		string _serverTemplate;
-	} Configuration;
+	class Strings
+	{
+		public:
+			Strings();
+			string replace(string search, string replace, string original);
+	};
 }
 
 #endif
