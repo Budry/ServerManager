@@ -3,8 +3,8 @@ server {
 	server_name %hostName%.%tld%;
 	root %htdocs%/%hostName%/%root%/; 
 
-	error_%log% %htdocs%/%hostName%/%log%/%hostName%_errors.log;
-	access_%log% %htdocs%/%hostName%/%log%/%hostName%_access.log;
+	error_log %htdocs%/%hostName%/%log%/%hostName%_errors.log;
+	access_log %htdocs%/%hostName%/%log%/%hostName%_access.log;
 	
 	include common/common.conf;
 	include common/php.conf;
