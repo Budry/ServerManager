@@ -53,6 +53,8 @@ Configuration ConfigParser::getConfiguration()
 					cfg.nginx = value;
 				} else if (key.compare("hosts") == 0) {
 					cfg.hosts = value;
+				} else if (key.compare("log") == 0) {
+					cfg.log = value;
 				} else if (key.compare("systemTemplate") == 0) {
 					cfg.systemTemplate = value;
 				} else if (key.compare("serverTemplate") == 0) {

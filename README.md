@@ -43,6 +43,7 @@ $ sudo server-manager search <host-name> [options]
 * ```--htdocs```			- Set path to htdocs directory
 * ```--nginx```				- Set path to nginx sites-enabled directory
 * ```--hosts```				- Set path to hosts file *(/etc/hosts)*
+* ```--log```				- Set log directory (relative to root)
 * ```--systemTemplate```	- Set template for host in system hosts file
 * ```--serverTemplate```	- Set template for server (apache/nginx/...) configuration
 

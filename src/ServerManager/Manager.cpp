@@ -86,11 +86,11 @@ string Manager::create(string hostName)
 		if(nginxConfig.good()) {
 			result.append("\nAdded virtual host nginx configuration");
 		}
-		Console mkdirLog("mkdir -p " + this->config.htdocs + "/" + hostName + "/log");
+		Console mkdirLog("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.log);
 		Console mkdirRoot("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.root);
 		if (mkdirLog.exec().empty() && mkdirRoot.exec().empty()) {
 			result.append("\nCreated base project directories: ");
-			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/log");
+			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.log);
 			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.root);
 		}
 		nginxConfig.close();
@@ -170,6 +170,7 @@ string Manager::getServerConfig(string hostName)
 	config = strings.replace("%tld%", this->config.tld, config);
 	config = strings.replace("%htdocs%", this->config.htdocs, config);
 	config = strings.replace("%root%", this->config.root, config);
+	config = strings.replace("%log%", this->config.log, config);
 
 	return config;
 }

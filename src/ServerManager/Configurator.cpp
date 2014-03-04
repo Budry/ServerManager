@@ -33,6 +33,8 @@ Configuration Configurator::applyOptions(Configuration config, ArgumentParser* a
 		config.nginx = args->getOption("--nginx");
 	} else if (!args->getOption("--hosts").empty()) {
 		config.hosts = args->getOption("--hosts");
+	} else if (!args->getOption("--log").empty()) {
+		config.log = args->getOption("--log");
 	} else if (!args->getOption("--serverTemplate").empty()) {
 		config.serverTemplate = args->getOption("--serverTemplate");
 	} else if (!args->getOption("--systemTemplate").empty()) {
