@@ -13,7 +13,7 @@ Simply server manager for manage virtual hosts in nginx and Linux.
 3. And next you must edit ```/home/user/.server-manager/.server-manager``` config file and fill your paths and configuration.
 
 You can update base templates or create custom in ```~/.server-manager/templates```. This files are templates for configuration.
-For more info see [Template](#Templates)
+For more info see [Template](#templates)
 
 *If you want set directory automatically use ```htdocs=pwd```*
 
@@ -52,7 +52,7 @@ $ sudo server-manager search <host-name> [options]
 
 You can edit templates for system hosts and server virtual host configuration. You can create custom template too.
 In tempaltes you can use keywords: ```%hostName```, ```%tld%```, ```%root%```, ```%htdocs%```. This keywords will be
-replaced by section in configuration file or by [options](#Options) with same name.
+replaced by section in configuration file or by [options](#options) with same name.
 
 If you can add custom template you must edit in config file section ```serverTemplate``` or ```systemTemplate``` or you can use
 options ```--serverTemplate <path>``` and ```---systemTemplate <path>```.
