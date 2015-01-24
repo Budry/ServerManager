@@ -1,9 +1,0 @@
-root=www
-htdocs=pwd
-hosts=/etc/hosts
-nginx=/etc/nginx/sites-enabled
-tld=dev
-log=log
-
-serverTemplate=/home/budry/.server-manager/templates/nginx
-systemTemplate=/home/budry/.server-manager/templates/hosts
