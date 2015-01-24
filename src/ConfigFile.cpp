@@ -9,17 +9,22 @@
 #include <fstream>
 #include <iostream>
 #include <regex>
+#include <cstdlib>
 #include "ConfigFile.h"
 
 using namespace ServerManager;
 
-ConfigFile::ConfigFile(std::string pathName) {
-  this->pathName = pathName;
+ConfigFile::ConfigFile() {
+  std::string homeDir = getenv("HOME");
+  this->pathName = homeDir.append("/.server-manager/config.ini");
 }
 
 std::string ConfigFile::readString(std::string section, std::string key, std::string defaultVal) {
 
   std::ifstream fileStream(this->pathName.c_str());
+  if (!fileStream.good()) {
+    return defaultVal;
+  }
   std::string line;
   bool isEnd = false;
   bool inSection = false;

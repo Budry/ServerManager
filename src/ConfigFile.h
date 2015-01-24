@@ -14,7 +14,7 @@
 namespace ServerManager {
   class ConfigFile {
     public:
-      ConfigFile(std::string);
+      ConfigFile();
       std::string readString(std::string, std::string, std::string);
     private:
       std::string pathName;
