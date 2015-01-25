@@ -16,7 +16,7 @@ namespace ServerManager {
   class Input {
     public:
       Input(int, const char *[]);
-      std::string getOption(std::string);
+      std::string getOption(std::string, std::string);
       std::string getCommand();
       std::string getHostName();
     private:

@@ -60,9 +60,9 @@ Input::Input(int argc, const char *argv[]) {
   }
 }
 
-std::string Input::getOption(std::string name) {
+std::string Input::getOption(std::string name, std::string defaultVal) {
   if (this->options.find(name) == this->options.end() ) {
-    return "";
+    return defaultVal;
   } else {
     return this->options.find(name)->second;
   }
