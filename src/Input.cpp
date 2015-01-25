@@ -47,7 +47,7 @@ Input::Input(int argc, const char *argv[]) {
     throw "Invalid command!. See --help or help.";
   }
 
-  std::regex optionPattern("^--(.*)$");
+  std::regex optionPattern("^--([a-zA-Z0-9]+)$");
   std::cmatch match;
   for (; i < argc; i++) {
     if (std::regex_match(argv[i], match, optionPattern)) {
