@@ -8,14 +8,12 @@
 
 #include <fstream>
 #include <regex>
-#include <cstdlib>
 #include "ConfigFile.h"
 
 using namespace ServerManager;
 
-ConfigFile::ConfigFile() {
-  std::string homeDir = getenv("HOME");
-  this->pathName = homeDir.append("/.server-manager/config.ini");
+ConfigFile::ConfigFile(std::string path) {
+  this->pathName = path;
 }
 
 std::string ConfigFile::readString(std::string section, std::string key, std::string defaultVal) {
