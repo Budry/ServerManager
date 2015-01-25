@@ -16,7 +16,7 @@ ConfigFile::ConfigFile(std::string path) {
   this->pathName = path;
 }
 
-std::string ConfigFile::readString(std::string section, std::string key, std::string defaultVal) {
+std::string ConfigFile::get(std::string section, std::string key, std::string defaultVal) {
   std::ifstream fileStream(this->pathName.c_str());
   if (!fileStream.good()) {
     return defaultVal;
