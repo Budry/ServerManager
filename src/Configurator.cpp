@@ -61,3 +61,11 @@ std::string Configurator::getLogDir() {
   std::string key = "log";
   return this->input->getOption(key, this->config->get(templateName, key));
 }
+
+std::string Configurator::getCommand() {
+  return this->input->getCommand();
+}
+
+std::string Configurator::getHostName() {
+  return this->input->getHostName();
+}

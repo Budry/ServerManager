@@ -23,6 +23,8 @@ namespace ServerManager {
       std::string getHtdocs();
       std::string getRoot();
       std::string getLogDir();
+      std::string getCommand();
+      std::string getHostName();
     private:
       Input *input;
       ConfigFile *config;
