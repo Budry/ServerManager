@@ -7,7 +7,6 @@
 **/
 
 #include <fstream>
-#include <iostream>
 #include <regex>
 #include <cstdlib>
 #include "ConfigFile.h"
