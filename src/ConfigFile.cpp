@@ -16,10 +16,10 @@ ConfigFile::ConfigFile(std::string path) {
   this->pathName = path;
 }
 
-std::string ConfigFile::get(std::string section, std::string key, std::string defaultVal) {
+std::string ConfigFile::get(std::string section, std::string key) {
   std::ifstream fileStream(this->pathName.c_str());
   if (!fileStream.good()) {
-    return defaultVal;
+    return "";
   }
   std::string line;
   bool isEnd = false;
@@ -46,5 +46,5 @@ std::string ConfigFile::get(std::string section, std::string key, std::string de
     }
   }
 
-  return defaultVal;
+  return "";
 }
