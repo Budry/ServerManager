@@ -5,5 +5,5 @@ nginx=/etc/nginx/sites-enabled
 tld=dev
 log=log
 
-serverTemplate=/home/budry/.server-manager/templates/nginx
-systemTemplate=/home/budry/.server-manager/templates/hosts
+serverTemplate=/home/<username>/.server-manager/templates/nginx
+systemTemplate=/home/<username>/.server-manager/templates/hosts

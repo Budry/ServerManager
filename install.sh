@@ -12,9 +12,11 @@ then
 	then
 		rm ${CONFIG_PATH} -rf
 		cp .server-manager/ ${CONFIG_PATH} -r
+		sed -i "s/<username>/${SUDO_USER}/g" ${CONFIG_PATH}/.server-manager
 	fi
 else
 	cp .server-manager/ ${CONFIG_PATH} -r
+	sed -i "s/<username>/${SUDO_USER}/g" ${CONFIG_PATH}/.server-manager
 fi
 
 chmod -R 0777 ${CONFIG_PATH}
