@@ -59,6 +59,8 @@ Configuration ConfigParser::getConfiguration()
 					cfg.systemTemplate = value;
 				} else if (key.compare("serverTemplate") == 0) {
 					cfg.serverTemplate = value;
+				} else if (key.compare("project") == 0) {
+					cfg.project = value;
 				} else {
 					throw "Unsupported option";
 				}

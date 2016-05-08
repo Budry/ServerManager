@@ -26,8 +26,8 @@ const char* HELP = "ServerManager v1.0.0\n" \
 					"\t--ext\t- Set virtual host extension (example: project.lc or projec.dev)\n" \
 					"\t--htdoc\t- Set htdocs directoryr\n" \
 					"\t--nginx\t- Set path to nginx configuration (sites-enabled)\n" \
-					"\t--hosts\t- Set path to hosts file (example: /etc/hosts)\n";
-
+					"\t--hosts\t- Set path to hosts file (example: /etc/hosts)\n" \
+					"\t--project\t- Set path to project (example git repository: https://github.com/nette/web-project)\n";
 string formateError(string message);
 string formateThrow(string message);
 string formateSuccess(string message);

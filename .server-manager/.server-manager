@@ -4,6 +4,7 @@ hosts=/etc/hosts
 nginx=/etc/nginx/sites-enabled
 tld=dev
 log=log
+project=https://github.com/nette/web-project.git
 
 serverTemplate=/home/<username>/.server-manager/templates/nginx
 systemTemplate=/home/<username>/.server-manager/templates/hosts

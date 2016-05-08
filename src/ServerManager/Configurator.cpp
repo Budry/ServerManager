@@ -39,6 +39,8 @@ Configuration Configurator::applyOptions(Configuration config, ArgumentParser* a
 		config.serverTemplate = args->getOption("--serverTemplate");
 	} else if (!args->getOption("--systemTemplate").empty()) {
 		config.systemTemplate = args->getOption("--serverTemplate");
+	} else if (!args->getOption("--project").empty()) {
+		config.project = args->getOption("--project");
 	}
 
 	return config;
