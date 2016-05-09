@@ -25,6 +25,7 @@ namespace ServerManager
 		string log;
 		string systemTemplate;
 		string serverTemplate;
+		string project;
 	} Configuration;
 }
 

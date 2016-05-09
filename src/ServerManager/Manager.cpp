@@ -51,7 +51,7 @@ string Manager::getList()
 				if (getline(line_string, key, '\t')) {
 					this->appendLine(&result, key, line);
 				}
-					
+
 			}
 		}
 		file.close();
@@ -86,12 +86,24 @@ string Manager::create(string hostName)
 		if(nginxConfig.good()) {
 			result.append("\nAdded virtual host nginx configuration");
 		}
-		Console mkdirLog("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.log);
-		Console mkdirRoot("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.root);
-		if (mkdirLog.exec().empty() && mkdirRoot.exec().empty()) {
-			result.append("\nCreated base project directories: ");
-			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.log);
-			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.root);
+		if(!this->config.project.empty()) {
+			Console testGitRepository("git ls-remote " + this->config.project + " --exit-code");
+			if(testGitRepository.exec().empty()) {
+					Console cloneGitRepository("git clone " + this->config.project + " " + this->config.htdocs + "/" + hostName);
+					cloneGitRepository.exec();
+					result.append("\nCreated project from git repository");
+			} else {
+				nginxConfig.close();
+				throw "Check if repository of project is valid: " + this->config.project;
+			}
+		} else {
+			Console mkdirLog("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.log);
+			Console mkdirRoot("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.root);
+			if (mkdirLog.exec().empty() && mkdirRoot.exec().empty()) {
+				result.append("\nCreated base project directories: ");
+				result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.log);
+				result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.root);
+			}
 		}
 		nginxConfig.close();
 	} else {

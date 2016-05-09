@@ -22,7 +22,7 @@ For more info see [Template](#templates)
 **Important! Server manager must be run with sudo**
 
 ```shell
-$ sudo server-mamager list [options]
+$ sudo server-manager list [options]
 $ sudo server-manager create <host-name> [options]
 $ sudo server-manager remove <host-name> [options]
 $ sudo server-manager search <host-name> [options]
@@ -46,18 +46,19 @@ $ sudo server-manager search <host-name> [options]
 * ```--log```				- Set log directory (relative to root)
 * ```--systemTemplate```	- Set template for host in system hosts file
 * ```--serverTemplate```	- Set template for server (apache/nginx/...) configuration
+* ```--project```				- Set default git project repository link
 
 **All default configuration are in ```/home/user/.server-manager/.server-manager``` file and you can change it.**
 
 ### Templates
 
 You can edit templates for system hosts and server virtual host configuration. You can create custom template too.
-In tempaltes you can use keywords: ```%hostName```, ```%tld%```, ```%root%```, ```%htdocs%```. This keywords will be
+In templates you can use keywords: ```%hostName```, ```%tld%```, ```%root%```, ```%htdocs%```. This keywords will be
 replaced by section in configuration file or by [options](#options) with same name.
 
 If you can add custom template you must edit in config file section ```serverTemplate``` or ```systemTemplate``` or you can use
 options ```--serverTemplate <path>``` and ```---systemTemplate <path>```.
 
 Default options are:
-* [system tempalte](https://github.com/Budry/ServerManager/blob/template/.server-manager/templates/hosts)
+* [system template](https://github.com/Budry/ServerManager/blob/template/.server-manager/templates/hosts)
 * [server template](https://github.com/Budry/ServerManager/blob/template/.server-manager/templates/nginx)
