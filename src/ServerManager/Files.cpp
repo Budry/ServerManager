@@ -24,7 +24,7 @@ string Files::getString(string path)
 		throw "Invalid file";
 	}
 	while (getline(file, line)) {
-		content.append(line);
+		content.append(line + "\n");
 	}
 	file.close();
 
