@@ -132,13 +132,14 @@ string Manager::remove(string hostName)
 
 	ifstream ihostFile(this->config.hosts.c_str());
 	if (ihostFile.good()) {
+		ihostFile.close();
 		Console rmHost("sed -i /" + hostName + "/d " + this->config.hosts.c_str());
 		if(rmHost.exec().empty()) {
 			result.append("\nVirtual host/s has been removed from hosts file");
 		}
 	} else {
-		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 		ihostFile.close();
+		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 	}
 	Console nginxStart("nginx");
 	if (nginxStart.exec().empty()) {
