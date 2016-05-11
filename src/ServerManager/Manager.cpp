@@ -145,7 +145,7 @@ string Manager::remove(string hostName)
 	ifstream ihostFile(this->config.hosts.c_str());
 	if (ihostFile.good()) {
 		ihostFile.close();
-		Console rmHost("sed -i /" + hostName + "/d " + this->config.hosts.c_str());
+		Console rmHost("sed --in-place /" + hostName + "/d " + this->config.hosts.c_str());
 		if (rmHost.exec().empty()) {
 			result.append("\nVirtual host/s has been removed from hosts file");
 		}
