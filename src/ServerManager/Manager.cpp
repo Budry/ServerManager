@@ -86,24 +86,12 @@ string Manager::create(string hostName)
 		if(nginxConfig.good()) {
 			result.append("\nAdded virtual host nginx configuration");
 		}
-		if(!this->config.project.empty()) {
-			Console testGitRepository("git ls-remote " + this->config.project + " --exit-code");
-			if(testGitRepository.exec().empty()) {
-					Console cloneGitRepository("git clone " + this->config.project + " " + this->config.htdocs + "/" + hostName);
-					cloneGitRepository.exec();
-					result.append("\nCreated project from git repository");
-			} else {
-				nginxConfig.close();
-				throw "Check if repository of project is valid: " + this->config.project;
-			}
-		} else {
-			Console mkdirLog("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.log);
-			Console mkdirRoot("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.root);
-			if (mkdirLog.exec().empty() && mkdirRoot.exec().empty()) {
-				result.append("\nCreated base project directories: ");
-				result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.log);
-				result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.root);
-			}
+		Console mkdirLog("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.log);
+		Console mkdirRoot("mkdir -p " + this->config.htdocs + "/" + hostName + "/" + this->config.root);
+		if (mkdirLog.exec().empty() && mkdirRoot.exec().empty()) {
+			result.append("\nCreated base project directories: ");
+			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.log);
+			result.append("\n\t-" + this->config.htdocs + "/" + hostName + "/" + this->config.root);
 		}
 		nginxConfig.close();
 	} else {
@@ -141,19 +129,13 @@ string Manager::remove(string hostName)
 	} else {
 		throw "Invalid path to nginx sites-enabled directory or you don't run as administrator(sudo)";
 	}
+
 	ifstream ihostFile(this->config.hosts.c_str());
 	if (ihostFile.good()) {
-		string line, newContent = "";
-		while(getline(ihostFile, line)) {
-			if (line.compare(this->getHostConfig(hostName)) != 0 && !line.empty())  {
-				newContent.append(line + "\n");
-			}
+		Console rmHost("sed -i /" + hostName + "/d " + this->config.hosts.c_str());
+		if(rmHost.exec().empty()) {
+			result.append("\nVirtual host/s has been removed from hosts file");
 		}
-		ofstream ohostFile(this->config.hosts.c_str());
-		ohostFile << newContent;
-		result.append("\nVirtual host has been removed from hosts file");
-		ihostFile.close();
-		ohostFile.close();
 	} else {
 		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 		ihostFile.close();
