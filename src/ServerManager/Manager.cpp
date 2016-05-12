@@ -66,19 +66,27 @@ string Manager::getList()
 string Manager::create(string hostName)
 {
 	string result;
+
 	Console console("nginx -s stop");
 	if (console.exec().empty()) {
 		result.append("Stoping nginx");
 	}
+
 	ofstream hostsFile(this->config.hosts.c_str(), ios_base::app | ios_base::out);
-	if (hostsFile.good()) {
-		hostsFile << endl << this->getHostConfig(hostName);
-		result.append("\nAdded virtual host into hosts file");
-		hostsFile.close();
-	} else {
+	if (!hostsFile.good()) {
 		hostsFile.close();
 		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 	}
+
+	if (!this->search(hostName).empty()) {
+		hostsFile.close();
+		throw "Hostname already exists";
+	}
+
+	hostsFile << endl << this->getHostConfig(hostName);
+	result.append("\nAdded virtual host into hosts file");
+	hostsFile.close();
+
 	string path = this->config.nginx + "/" + hostName + ".conf";
 	ofstream nginxConfig(path.c_str());
 	if (nginxConfig.good()) {
