@@ -41,18 +41,18 @@ int main(int argc, char** argv)
 			manager->setConfiguration(config);
 			cout << formateSuccess(manager->create(argsParser->getParam())) << endl;
 		} else if (argsParser->getAction().compare("remove") == 0) {
-			cout << formateProcess("Removing virtual host:") << endl;
+			cout << formateProcess("Removing virtual hosts:") << endl;
 			manager->setConfiguration(config);
 			cout << formateSuccess(manager->remove(argsParser->getParam())) << endl;
 		} else if (argsParser->getAction().compare("search") == 0) {
 			manager->setConfiguration(config);
-			cout << formateSuccess("Host ");
+			cout << formateSuccess("Virtual hosts ");
 			cout <<	formateProcess(argsParser->getParam());
 			cout << formateSuccess(" has been found in:") << endl;
 			cout << formateProcess(manager->search(argsParser->getParam())) << endl;
 		} else {
 			cout << formateProcess(HELP) << endl;
-		}	
+		}
 	} catch(const char* e) {
 		cerr << formateThrow(e) << endl;
 	}

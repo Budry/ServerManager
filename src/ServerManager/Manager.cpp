@@ -91,12 +91,12 @@ string Manager::create(string hostName)
 	ofstream nginxConfig(path.c_str());
 	if (nginxConfig.good()) {
 		nginxConfig << this->getServerConfig(hostName);
-		if(nginxConfig.good()) {
+		if (nginxConfig.good()) {
 			result.append("\nAdded virtual host nginx configuration");
 		}
-		if(!this->config.project.empty()) {
+		if (!this->config.project.empty()) {
 			Console testGitRepository("git ls-remote " + this->config.project + " --exit-code");
-			if(testGitRepository.exec().empty()) {
+			if (testGitRepository.exec().empty()) {
 					Console cloneGitRepository("git clone " + this->config.project + " " + this->config.htdocs + "/" + hostName);
 					cloneGitRepository.exec();
 					result.append("\nCreated project from git repository");
@@ -149,22 +149,17 @@ string Manager::remove(string hostName)
 	} else {
 		throw "Invalid path to nginx sites-enabled directory or you don't run as administrator(sudo)";
 	}
+
 	ifstream ihostFile(this->config.hosts.c_str());
 	if (ihostFile.good()) {
-		string line, newContent = "";
-		while(getline(ihostFile, line)) {
-			if (line.compare(this->getHostConfig(hostName)) != 0 && !line.empty())  {
-				newContent.append(line + "\n");
-			}
+		ihostFile.close();
+		Console rmHost("sed --in-place '/" + hostName + "/d' " + this->config.hosts.c_str());
+		if (rmHost.exec().empty()) {
+			result.append("\nVirtual host/s has been removed from hosts file");
 		}
-		ofstream ohostFile(this->config.hosts.c_str());
-		ohostFile << newContent;
-		result.append("\nVirtual host has been removed from hosts file");
-		ihostFile.close();
-		ohostFile.close();
 	} else {
-		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 		ihostFile.close();
+		throw "Invalid path to hosts file or you don't run as administrator(sudo)";
 	}
 	Console nginxStart("nginx");
 	if (nginxStart.exec().empty()) {
